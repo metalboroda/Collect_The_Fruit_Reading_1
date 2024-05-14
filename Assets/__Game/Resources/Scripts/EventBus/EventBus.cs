@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace __Game.Resources.Scripts.EventBus
 {
-
   public static class EventBusUtility
   {
     public static IReadOnlyList<Type> EventTypes { get; private set; }
@@ -114,6 +113,8 @@ namespace __Game.Resources.Scripts.EventBus
     private static readonly List<Callback> callbacks = new List<Callback>();
     private static int count;
 
+    private static readonly Stack<Awaiter> awaiterPool = new Stack<Awaiter>();
+
     public class Awaiter : EventBinding<T>
     {
       public bool EventRaised { get; private set; }
@@ -128,6 +129,12 @@ namespace __Game.Resources.Scripts.EventBus
       {
         EventRaised = true;
         Payload = ev;
+      }
+
+      public void Reset()
+      {
+        EventRaised = false;
+        Payload = default;
       }
     }
 
@@ -256,8 +263,19 @@ namespace __Game.Resources.Scripts.EventBus
 
     public static Awaiter NewAwaiter()
     {
-      // TODO: do it non alloc
+      if (awaiterPool.Count > 0)
+      {
+        var awaiter = awaiterPool.Pop();
+        awaiter.Reset();
+        return awaiter;
+      }
       return new Awaiter();
+    }
+
+    public static void ReturnAwaiter(Awaiter awaiter)
+    {
+      awaiter.Reset();
+      awaiterPool.Push(awaiter);
     }
   }
 }

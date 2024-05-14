@@ -3,7 +3,6 @@ using Assets.__Game.Resources.Scripts.Train;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.__Game.Resources.Scripts.Variant
 {
