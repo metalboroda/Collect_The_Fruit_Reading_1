@@ -75,6 +75,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
       {
         _correctCounter++;
         _correctItems.Remove(_placedTreeItem);
+        _placedTreeItem.SpawnParticles(true);
 
         Destroy(_placedTreeItem.gameObject);
 
@@ -94,6 +95,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
       {
         _incorrectCounter++;
         _incorrectItems.Remove(_placedTreeItem);
+        _placedTreeItem.SpawnParticles(false);
 
         Destroy(_placedTreeItem.gameObject);
 

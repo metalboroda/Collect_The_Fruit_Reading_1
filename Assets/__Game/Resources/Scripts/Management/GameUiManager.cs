@@ -243,11 +243,11 @@ namespace Assets.__Game.Resources.Scripts.Management
           SwitchCanvas(_gameCanvas);
           break;
         case GameWinState:
-          SwitchCanvas(_winCanvas);
+          SwitchCanvas(_winCanvas, 1);
           TryToEnableReward();
           break;
         case GameLoseState:
-          SwitchCanvas(_loseCanvas);
+          SwitchCanvas(_loseCanvas, 1);
           break;
         case GamePauseState:
           SwitchCanvas(_pauseCanvas);

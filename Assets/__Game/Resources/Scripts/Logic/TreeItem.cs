@@ -12,6 +12,9 @@ namespace Assets.__Game.Resources.Scripts.Logic
     [SerializeField] private GameObject _model;
     [SerializeField] private float _minModelSize = 0.95f;
     [SerializeField] private float _maxModelSize = 1.05f;
+    [Header("Effect")]
+    [SerializeField] private GameObject _correctParticles;
+    [SerializeField] private GameObject _incorrectParticles;
 
     public string Answer { get; private set; }
 
@@ -74,6 +77,14 @@ namespace Assets.__Game.Resources.Scripts.Logic
       if (_placed == true) return;
 
       transform.DOLocalMove(_initLocalPosition, 0.25f);
+    }
+
+    public void SpawnParticles(bool correct)
+    {
+      if (correct == true)
+        Instantiate(_correctParticles, transform.position, Quaternion.identity);
+      else
+        Instantiate(_incorrectParticles, transform.position, Quaternion.identity);
     }
   }
 }

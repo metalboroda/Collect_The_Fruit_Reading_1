@@ -301,6 +301,8 @@ MonoBehaviour:
   _model: {fileID: 8264760716943559142}
   _minModelSize: 0.9
   _maxModelSize: 1.1
+  _correctParticles: {fileID: 6324248135578473576, guid: fb10678b7def34d4e861c4d11cb8050a, type: 3}
+  _incorrectParticles: {fileID: 6324248135578473576, guid: 0b1f3dc34904282408d8447cfe14744b, type: 3}
 --- !u!1 &8264760717279842908
 GameObject:
   m_ObjectHideFlags: 0
