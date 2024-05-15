@@ -62,7 +62,10 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private GameObject _pauseAudioOffImage;
 
     private readonly List<GameObject> _canvases = new();
+    private int _currentScore;
+    private int _overallScore;
     private int _currentLoses;
+    private bool _canAnimate = false;
 
     private GameBootstrapper _gameBootstrapper;
     private Reward _reward;
@@ -70,8 +73,9 @@ namespace Assets.__Game.Resources.Scripts.Management
 
     private EventBinding<EventStructs.ComponentEvent<GameBootstrapper>> _componentEvent;
     private EventBinding<EventStructs.StateChanged> _stateChanged;
-    private EventBinding<EventStructs.VariantsAssignedEvent> _variantsAssignedEvent;
     private EventBinding<EventStructs.TimerEvent> _timerEvent;
+    private EventBinding<EventStructs.SpawnedItemsEvent> _spawnedItemsEvent;
+    private EventBinding<EventStructs.BasketPlacedItemEvent> _basketPlacedItemsEvent;
 
     private void Awake()
     {
@@ -85,16 +89,20 @@ namespace Assets.__Game.Resources.Scripts.Management
     {
       _componentEvent = new EventBinding<EventStructs.ComponentEvent<GameBootstrapper>>(SetBootstrapper);
       _stateChanged = new EventBinding<EventStructs.StateChanged>(SwitchCanvasesDependsOnState);
-      _variantsAssignedEvent = new EventBinding<EventStructs.VariantsAssignedEvent>(DisplayLevelCounter);
       _timerEvent = new EventBinding<EventStructs.TimerEvent>(DisplayTimer);
+      _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(SetOverallScore);
+      _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(DisplayLevelCounter);
+      _basketPlacedItemsEvent = new EventBinding<EventStructs.BasketPlacedItemEvent>(DisplayScore);
     }
 
     private void OnDisable()
     {
       _componentEvent.Remove(SetBootstrapper);
       _stateChanged.Remove(SwitchCanvasesDependsOnState);
-      _variantsAssignedEvent.Remove(DisplayLevelCounter);
       _timerEvent.Remove(DisplayTimer);
+      _spawnedItemsEvent.Remove(SetOverallScore);
+      _spawnedItemsEvent.Remove(DisplayLevelCounter);
+      _basketPlacedItemsEvent.Remove(DisplayScore);
     }
 
     private void Start()
@@ -189,7 +197,29 @@ namespace Assets.__Game.Resources.Scripts.Management
       _gameBootstrapper = componentEvent.Data;
     }
 
-    private void DisplayLevelCounter(EventStructs.VariantsAssignedEvent variantsAssignedEvent)
+    private void SetOverallScore(EventStructs.SpawnedItemsEvent spawnedItemsEvent)
+    {
+      _overallScore = spawnedItemsEvent.CorrectItems.Count;
+      _gameScoreCounterTxt.text = $"{_currentScore} / {_overallScore}";
+
+      _gameLoseCounterTxt.text = _currentLoses.ToString();
+    }
+
+    private void DisplayScore(EventStructs.BasketPlacedItemEvent basketPlacedItemEvent)
+    {
+      if (basketPlacedItemEvent.Correct == true)
+      {
+        _currentScore += basketPlacedItemEvent.CorrectIncrement;
+        _gameScoreCounterTxt.text = $"{_currentScore} / {_overallScore}";
+      }
+      else
+      {
+        _currentLoses += basketPlacedItemEvent.IncorrectIncrement;
+        _gameLoseCounterTxt.text = $"{_currentLoses}";
+      }
+    }
+
+    private void DisplayLevelCounter(EventStructs.SpawnedItemsEvent spawnedItemsEvent)
     {
       if (_gameSettings.OverallLevelIndex == 0)
         _questLevelCounterText.text = $"НАВЧАЛЬНИЙ РІВЕНЬ";

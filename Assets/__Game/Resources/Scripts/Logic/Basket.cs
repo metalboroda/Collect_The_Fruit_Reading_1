@@ -83,6 +83,12 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
         if (Tutorial == false)
           EventBus<EventStructs.LevelPointEvent>.Raise(new EventStructs.LevelPointEvent { LevelPoint = 1 });
+
+        EventBus<EventStructs.BasketPlacedItemEvent>.Raise(new EventStructs.BasketPlacedItemEvent
+        {
+          Correct = true,
+          CorrectIncrement = 1
+        });
       }
       else
       {
@@ -93,6 +99,12 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
         if (_incorrectCounter >= _incorrectItems.Count)
           _gameBootstrapper.StateMachine.ChangeState(new GameLoseState(_gameBootstrapper));
+
+        EventBus<EventStructs.BasketPlacedItemEvent>.Raise(new EventStructs.BasketPlacedItemEvent
+        {
+          Correct = false,
+          IncorrectIncrement = 1
+        });
       }
 
       EventBus<EventStructs.BasketReceivedItemEvent>.Raise(new EventStructs.BasketReceivedItemEvent());

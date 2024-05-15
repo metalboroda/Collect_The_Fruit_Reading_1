@@ -32,6 +32,15 @@ namespace __Game.Resources.Scripts.EventBus
     }
     #endregion
 
+    #region TreeItem
+    public struct BasketPlacedItemEvent : IEvent
+    {
+      public bool Correct;
+      public int CorrectIncrement;
+      public int IncorrectIncrement;
+    }
+    #endregion
+
     #region Basket
     public struct BasketReceivedItemEvent : IEvent { }
     #endregion
