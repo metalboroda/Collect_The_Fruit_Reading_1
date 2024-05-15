@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1705648572939193202, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6570f91fa481954428cb66d9fb6c20e7, type: 3}
     - target: {fileID: 3325229845286665931, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.275
@@ -87,6 +91,10 @@ PrefabInstance:
       propertyPath: _treeItemsDatas.Array.data[0].<AnswerText>k__BackingField
       value: "\u0411"
       objectReference: {fileID: 0}
+    - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _treeItemsDatas.Array.data[0].<NarrationCLip>k__BackingField
+      value: 
+      objectReference: {fileID: 8300000, guid: 71d59d85268effb4ba80db56dae2e08b, type: 3}
     - target: {fileID: 8738646877908123585, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.1

@@ -19,6 +19,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
     [SerializeField] private AudioClip _soundEffect;
 
     public string Answer { get; private set; }
+    public AudioClip NarrationClip { get; private set; }
 
     private Vector3 _initLocalPosition;
     private Vector3 _offset;
@@ -61,12 +62,18 @@ namespace Assets.__Game.Resources.Scripts.Logic
       _text.text = Answer;
     }
 
+    public void SetNarrationClip(AudioClip audioClip)
+    {
+      NarrationClip = audioClip;
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
       _offset = transform.position - _mainCamera.ScreenToWorldPoint(
         new Vector3(eventData.position.x, eventData.position.y, transform.position.z));
 
       PlaySoundEffect();
+      PlayNarration();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -99,6 +106,11 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
       _audioSource.pitch = randomPitch;
       _audioSource.PlayOneShot(_soundEffect);
+    }
+
+    private void PlayNarration()
+    {
+      _audioSource.PlayOneShot(NarrationClip);
     }
   }
 }

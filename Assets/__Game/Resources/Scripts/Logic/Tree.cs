@@ -62,6 +62,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
       spawnedItem.SetRandomModelSize();
       spawnedItem.SetAnswer(treeItemData.AnswerText);
+      spawnedItem.SetNarrationClip(treeItemData.NarrationCLip);
       _spawnedPositions.Add(spawnPosition);
 
       if (_correctValuesContainerSo.CorrectValues.Contains(treeItemData.AnswerText))
