@@ -17,13 +17,6 @@ namespace __Game.Resources.Scripts.EventBus
     public struct StuporEvent : IEvent { }
     #endregion
 
-    #region Train
-    public struct TrainMovementEvent : IEvent
-    {
-      public bool IsMoving;
-    }
-    #endregion
-
     #region Tree
     public struct SpawnedItemsEvent : IEvent
     {
