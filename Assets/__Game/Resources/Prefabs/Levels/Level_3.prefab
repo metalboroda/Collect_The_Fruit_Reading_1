@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: _maxTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5322166287789507224, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _correctValuesContainerSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 76315c3db2af7c94d9a330f95e0beca5, type: 2}
     - target: {fileID: 5381777621544629463, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_text
       value: "\u0411\u0430"
@@ -74,6 +78,14 @@ PrefabInstance:
     - target: {fileID: 7317661472858753463, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _correctValuesContainerSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 76315c3db2af7c94d9a330f95e0beca5, type: 2}
+    - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _treeItemsDatas.Array.data[0].<AnswerText>k__BackingField
+      value: "\u0411"
       objectReference: {fileID: 0}
     - target: {fileID: 8738646877908123585, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x

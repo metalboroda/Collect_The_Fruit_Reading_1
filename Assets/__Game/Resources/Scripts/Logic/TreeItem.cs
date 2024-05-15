@@ -15,6 +15,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
     [Header("Effect")]
     [SerializeField] private GameObject _correctParticles;
     [SerializeField] private GameObject _incorrectParticles;
+    [Header("Sound")]
+    [SerializeField] private AudioClip _soundEffect;
 
     public string Answer { get; private set; }
 
@@ -23,10 +25,12 @@ namespace Assets.__Game.Resources.Scripts.Logic
     private bool _placed = false;
 
     private Camera _mainCamera;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
       _mainCamera = Camera.main;
+      _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -61,6 +65,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
     {
       _offset = transform.position - _mainCamera.ScreenToWorldPoint(
         new Vector3(eventData.position.x, eventData.position.y, transform.position.z));
+
+      PlaySoundEffect();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -85,6 +91,14 @@ namespace Assets.__Game.Resources.Scripts.Logic
         Instantiate(_correctParticles, transform.position, Quaternion.identity);
       else
         Instantiate(_incorrectParticles, transform.position, Quaternion.identity);
+    }
+
+    private void PlaySoundEffect()
+    {
+      float randomPitch = Random.Range(0.95f, 1.05f);
+
+      _audioSource.pitch = randomPitch;
+      _audioSource.PlayOneShot(_soundEffect);
     }
   }
 }

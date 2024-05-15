@@ -1,4 +1,5 @@
 using Assets.__Game.Resources.Scripts.Logic;
+using Assets.__Game.Resources.Scripts.SOs;
 using Assets.__Game.Scripts.Enums;
 using System.Collections.Generic;
 
@@ -20,6 +21,7 @@ namespace __Game.Resources.Scripts.EventBus
     #region Tree
     public struct SpawnedItemsEvent : IEvent
     {
+      public CorrectValuesContainerSo CorrectValuesContainerSo;
       public List<TreeItem> CorrectItems;
       public List<TreeItem> IncorrectItems;
     }

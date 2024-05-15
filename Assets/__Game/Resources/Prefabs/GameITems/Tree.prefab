@@ -66,8 +66,32 @@ MonoBehaviour:
     <AnswerText>k__BackingField: "\u0430"
     <Amount>k__BackingField: 1
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
-    <AnswerText>k__BackingField: "\u0431"
-    <Amount>k__BackingField: 2
+    <AnswerText>k__BackingField: "\u043E"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u0435"
+    <Amount>k__BackingField: 1
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0432"
-    <Amount>k__BackingField: 3
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u0434"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u044E"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u0414"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u0412"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u0415"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u041E"
+    <Amount>k__BackingField: 1
+  - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
+    <AnswerText>k__BackingField: "\u042E"
+    <Amount>k__BackingField: 1

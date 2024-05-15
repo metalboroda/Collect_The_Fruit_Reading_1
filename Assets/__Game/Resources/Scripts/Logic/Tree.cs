@@ -48,6 +48,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
       EventBus<EventStructs.SpawnedItemsEvent>.Raise(new EventStructs.SpawnedItemsEvent
       {
+        CorrectValuesContainerSo = _correctValuesContainerSo,
         CorrectItems = _correctItems,
         IncorrectItems = _incorrectItems
       });

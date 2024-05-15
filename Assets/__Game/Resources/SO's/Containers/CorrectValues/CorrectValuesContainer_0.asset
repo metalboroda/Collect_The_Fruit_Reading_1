@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ffb88484530eec45a90116f1a7b93f5, type: 3}
-  m_Name: CorrectValuesContainer_1
+  m_Name: CorrectValuesContainer_0
   m_EditorClassIdentifier: 
   _correctValues:
-  - "\u0431"
+  - "\u0430"

@@ -2,8 +2,10 @@
 using Assets.__Game.Resources.Scripts.Game.States;
 using Assets.__Game.Resources.Scripts.LevelItem;
 using Assets.__Game.Resources.Scripts.Settings;
+using Assets.__Game.Resources.Scripts.SOs;
 using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.Infrastructure;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,7 +24,6 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private TextMeshProUGUI _questLevelCounterText;
     [SerializeField] private TextMeshProUGUI _questCorrectNumbersTxt;
     [SerializeField] private Button _questPlayButton;
-
     [Header("Game Canvas")]
     [SerializeField] private GameObject _gameCanvas;
     [Space]
@@ -35,7 +36,9 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private Button _gamePauseButton;
     [Space]
     [SerializeField] private TextMeshProUGUI _gameTimerText;
-
+    [Header("Game Canvas Animation")]
+    [SerializeField] private float _gameImageeIn = 1.3f;
+    [SerializeField] private float _gameImageAnimDuration = 0.15f;
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
     [Space]
@@ -43,12 +46,10 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private Button _winRewardButton;
     [SerializeField] private GameObject _winPerfectText;
     [SerializeField] private AudioClip _winPerfectSound;
-
     [Header("Lose Canvas")]
     [SerializeField] private GameObject _loseCanvas;
     [Space]
     [SerializeField] private Button _loseRestartBtn;
-
     [Header("Pause Canvas")]
     [SerializeField] private GameObject _pauseCanvas;
     [Space]
@@ -61,11 +62,12 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private GameObject _pauseAudioOnImage;
     [SerializeField] private GameObject _pauseAudioOffImage;
 
+
     private readonly List<GameObject> _canvases = new();
     private int _currentScore;
     private int _overallScore;
     private int _currentLoses;
-    private bool _canAnimate = false;
+    private CorrectValuesContainerSo _correctValuesContainerSo;
 
     private GameBootstrapper _gameBootstrapper;
     private Reward _reward;
@@ -91,8 +93,9 @@ namespace Assets.__Game.Resources.Scripts.Management
       _stateChanged = new EventBinding<EventStructs.StateChanged>(SwitchCanvasesDependsOnState);
       _timerEvent = new EventBinding<EventStructs.TimerEvent>(DisplayTimer);
       _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(SetOverallScore);
-      _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(DisplayLevelCounter);
+      _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(DisplayCorrectValuesArray);
       _basketPlacedItemsEvent = new EventBinding<EventStructs.BasketPlacedItemEvent>(DisplayScore);
+      _basketPlacedItemsEvent = new EventBinding<EventStructs.BasketPlacedItemEvent>(IconScaleAnimation);
     }
 
     private void OnDisable()
@@ -101,8 +104,9 @@ namespace Assets.__Game.Resources.Scripts.Management
       _stateChanged.Remove(SwitchCanvasesDependsOnState);
       _timerEvent.Remove(DisplayTimer);
       _spawnedItemsEvent.Remove(SetOverallScore);
-      _spawnedItemsEvent.Remove(DisplayLevelCounter);
+      _spawnedItemsEvent.Remove(DisplayCorrectValuesArray);
       _basketPlacedItemsEvent.Remove(DisplayScore);
+      _basketPlacedItemsEvent.Remove(IconScaleAnimation);
     }
 
     private void Start()
@@ -219,7 +223,7 @@ namespace Assets.__Game.Resources.Scripts.Management
       }
     }
 
-    private void DisplayLevelCounter(EventStructs.SpawnedItemsEvent spawnedItemsEvent)
+    private void DisplayLevelCounter()
     {
       if (_gameSettings.OverallLevelIndex == 0)
         _questLevelCounterText.text = $"НАВЧАЛЬНИЙ РІВЕНЬ";
@@ -230,6 +234,39 @@ namespace Assets.__Game.Resources.Scripts.Management
         _pauseLevelCounterText.text = $"НАВЧАЛЬНИЙ РІВЕНЬ";
       else
         _pauseLevelCounterText.text = $"РІВЕНЬ {_gameSettings.OverallLevelIndex}";
+    }
+
+    private void DisplayCorrectValuesArray(EventStructs.SpawnedItemsEvent spawnedItemsEvent)
+    {
+      _correctValuesContainerSo = spawnedItemsEvent.CorrectValuesContainerSo;
+      string arrayString = "";
+
+      for (int i = 0; i < _correctValuesContainerSo.CorrectValues.Length; i++)
+      {
+        arrayString += _correctValuesContainerSo.CorrectValues[i];
+
+        if (i < _correctValuesContainerSo.CorrectValues.Length - 1)
+          arrayString += " ";
+      }
+
+      DisplayLevelCounter();
+
+      _questCorrectNumbersTxt.text = arrayString;
+      _pauseCorrectNumbersTxt.text = arrayString;
+    }
+
+    private void IconScaleAnimation(EventStructs.BasketPlacedItemEvent basketPlacedItemEvent)
+    {
+      Sequence seq = DOTween.Sequence();
+      Transform icon;
+
+      if (basketPlacedItemEvent.Correct == true)
+        icon = _gameStarImage.transform;
+      else
+        icon = _gameAngryFaceImage.transform;
+
+      seq.Append(icon.DOScale(_gameImageeIn, _gameImageAnimDuration));
+      seq.Append(icon.DOScale(1f, _gameImageAnimDuration));
     }
 
     private void SwitchCanvasesDependsOnState(EventStructs.StateChanged state)
