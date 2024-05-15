@@ -17,6 +17,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
     private List<TreeItem> _correctItems = new List<TreeItem>();
     private List<TreeItem> _incorrectItems = new List<TreeItem>();
+    private int _correctItemsAmount;
+    private int _incorrectItemsAmount;
     private bool _canReceiveItems = true;
     private TreeItem _placedTreeItem;
     private int _correctCounter;
@@ -50,6 +52,9 @@ namespace Assets.__Game.Resources.Scripts.Logic
     {
       _correctItems = spawnedItemsEvent.CorrectItems;
       _incorrectItems = spawnedItemsEvent.IncorrectItems;
+
+      _correctItemsAmount = _correctItems.Count;
+      _incorrectItemsAmount = _incorrectItems.Count;
     }
 
     public void PlaceItem(TreeItem treeItem)
@@ -79,7 +84,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
         Destroy(_placedTreeItem.gameObject);
 
-        if (_correctCounter >= _correctItems.Count)
+        if (_correctCounter >= _correctItemsAmount)
           _gameBootstrapper.StateMachine.ChangeState(new GameWinState(_gameBootstrapper));
 
         if (Tutorial == false)
@@ -99,7 +104,7 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
         Destroy(_placedTreeItem.gameObject);
 
-        if (_incorrectCounter >= _incorrectItems.Count)
+        if (_incorrectCounter >= _incorrectItemsAmount)
           _gameBootstrapper.StateMachine.ChangeState(new GameLoseState(_gameBootstrapper));
 
         EventBus<EventStructs.BasketPlacedItemEvent>.Raise(new EventStructs.BasketPlacedItemEvent

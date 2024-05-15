@@ -110,6 +110,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
     private void PlayNarration()
     {
+      if (NarrationClip == null) return;
+
       _audioSource.PlayOneShot(NarrationClip);
     }
   }
