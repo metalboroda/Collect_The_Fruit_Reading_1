@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3688607484703622301, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _maxTime
-      value: 12
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5154342330046889762, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _questAudio
@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: _correctValuesContainerSo
       value: 
       objectReference: {fileID: 11400000, guid: a085cf0f3a127ea48aa68013f2725545, type: 2}
+    - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _treeItemsDatas.Array.data[0].<Amount>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _treeItemsDatas.Array.data[0].<AnswerText>k__BackingField
       value: "\u0410"

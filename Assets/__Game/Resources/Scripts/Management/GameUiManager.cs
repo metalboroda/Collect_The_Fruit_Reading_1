@@ -56,6 +56,7 @@ namespace Assets.__Game.Resources.Scripts.Management
     [Header("Lose Canvas")]
     [SerializeField] private GameObject _loseCanvas;
     [Space]
+    [SerializeField] private Button _loseNextLevelBtn;
     [SerializeField] private Button _loseRestartBtn;
     [Header("Pause Canvas")]
     [SerializeField] private GameObject _pauseCanvas;
@@ -169,6 +170,15 @@ namespace Assets.__Game.Resources.Scripts.Management
       });
 
       // Lose
+      _loseNextLevelBtn.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.WinNextLevelButton
+        });
+
+        _gameBootstrapper.RestartLevel();
+      });
       _loseRestartBtn.onClick.AddListener(() =>
       {
         EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
@@ -296,7 +306,10 @@ namespace Assets.__Game.Resources.Scripts.Management
           TryToEnableReward();
 
           if (_lastLevel == true)
+          {
             _winNextLevelBtn.gameObject.SetActive(false);
+            _loseNextLevelBtn.gameObject.SetActive(false);
+          }
           break;
         case GameLoseState:
           _globalCanvas.SetActive(true);

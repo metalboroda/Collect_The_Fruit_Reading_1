@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1048459641896568566, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3325229845286665931, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -25,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3688607484703622301, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _maxTime
-      value: 20
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4717960151745444760, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_IsActive
@@ -74,6 +78,10 @@ PrefabInstance:
     - target: {fileID: 7317661472858753460, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776220956402797173, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _treeItemsDatas.Array.data[0].<Amount>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8738646877908123585, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
