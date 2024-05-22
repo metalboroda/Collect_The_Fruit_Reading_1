@@ -14,6 +14,13 @@ namespace __Game.Resources.Scripts.EventBus
     }
     #endregion
 
+    #region LevelManager
+    public struct LastLevelEvent : IEvent
+    {
+      public bool LastLevel;
+    }
+    #endregion
+
     #region Game
     public struct StuporEvent : IEvent { }
     #endregion

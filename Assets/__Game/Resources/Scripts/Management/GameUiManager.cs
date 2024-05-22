@@ -18,10 +18,17 @@ namespace Assets.__Game.Resources.Scripts.Management
   {
     [SerializeField] private AudioSource _audioSource;
 
+    [Header("GlobalCanvas")]
+    [SerializeField] private GameObject _globalCanvas;
+    [Space]
+    [SerializeField] private Button _globalAudioBtn;
+    [SerializeField] private GameObject _globalAudioOnImage;
+    [SerializeField] private GameObject _globalAudioOffImage;
     [Header("Quest Canvas")]
     [SerializeField] private GameObject _questCanvas;
     [Space]
     [SerializeField] private TextMeshProUGUI _questLevelCounterText;
+    [SerializeField] private TextMeshProUGUI _questTaskText;
     [SerializeField] private TextMeshProUGUI _questCorrectNumbersTxt;
     [SerializeField] private Button _questPlayButton;
     [Header("Game Canvas")]
@@ -54,20 +61,17 @@ namespace Assets.__Game.Resources.Scripts.Management
     [SerializeField] private GameObject _pauseCanvas;
     [Space]
     [SerializeField] private TextMeshProUGUI _pauseLevelCounterText;
+    [SerializeField] private TextMeshProUGUI _pauseTaskText;
     [SerializeField] private TextMeshProUGUI _pauseCorrectNumbersTxt;
     [SerializeField] private Button _pauseContinueBtn;
     [SerializeField] private Button _pauseRestartButton;
-    [Space]
-    [SerializeField] private Button _pauseAudioBtn;
-    [SerializeField] private GameObject _pauseAudioOnImage;
-    [SerializeField] private GameObject _pauseAudioOffImage;
-
 
     private readonly List<GameObject> _canvases = new();
     private int _currentScore;
     private int _overallScore;
     private int _currentLoses;
     private CorrectValuesContainerSo _correctValuesContainerSo;
+    private bool _lastLevel;
 
     private GameBootstrapper _gameBootstrapper;
     private Reward _reward;
@@ -78,6 +82,7 @@ namespace Assets.__Game.Resources.Scripts.Management
     private EventBinding<EventStructs.TimerEvent> _timerEvent;
     private EventBinding<EventStructs.SpawnedItemsEvent> _spawnedItemsEvent;
     private EventBinding<EventStructs.BasketPlacedItemEvent> _basketPlacedItemsEvent;
+    private EventBinding<EventStructs.LastLevelEvent> _lastLevelEvent;
 
     private void Awake()
     {
@@ -96,6 +101,7 @@ namespace Assets.__Game.Resources.Scripts.Management
       _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(DisplayCorrectValuesArray);
       _basketPlacedItemsEvent = new EventBinding<EventStructs.BasketPlacedItemEvent>(DisplayScore);
       _basketPlacedItemsEvent = new EventBinding<EventStructs.BasketPlacedItemEvent>(IconScaleAnimation);
+      _lastLevelEvent = new EventBinding<EventStructs.LastLevelEvent>(OnLastLevel);
     }
 
     private void OnDisable()
@@ -107,6 +113,7 @@ namespace Assets.__Game.Resources.Scripts.Management
       _spawnedItemsEvent.Remove(DisplayCorrectValuesArray);
       _basketPlacedItemsEvent.Remove(DisplayScore);
       _basketPlacedItemsEvent.Remove(IconScaleAnimation);
+      _lastLevelEvent.Remove(OnLastLevel);
     }
 
     private void Start()
@@ -184,7 +191,7 @@ namespace Assets.__Game.Resources.Scripts.Management
       {
         _gameBootstrapper.RestartLevel();
       });
-      _pauseAudioBtn.onClick.AddListener(SwitchAudioVolumeButton);
+      _globalAudioBtn.onClick.AddListener(SwitchAudioVolumeButton);
     }
 
     private void AddCanvasesToList()
@@ -251,7 +258,9 @@ namespace Assets.__Game.Resources.Scripts.Management
 
       DisplayLevelCounter();
 
+      _questTaskText.text = spawnedItemsEvent.CorrectValuesContainerSo.QuestText;
       _questCorrectNumbersTxt.text = arrayString;
+      _pauseTaskText.text = spawnedItemsEvent.CorrectValuesContainerSo.QuestText;
       _pauseCorrectNumbersTxt.text = arrayString;
     }
 
@@ -274,19 +283,27 @@ namespace Assets.__Game.Resources.Scripts.Management
       switch (state.State)
       {
         case GameQuestState:
+          _globalCanvas.SetActive(true);
           SwitchCanvas(_questCanvas);
           break;
         case GameplayState:
+          _globalCanvas.SetActive(false);
           SwitchCanvas(_gameCanvas);
           break;
         case GameWinState:
-          SwitchCanvas(_winCanvas, 1);
+          _globalCanvas.SetActive(true);
+          SwitchCanvas(_winCanvas);
           TryToEnableReward();
+
+          if (_lastLevel == true)
+            _winNextLevelBtn.gameObject.SetActive(false);
           break;
         case GameLoseState:
-          SwitchCanvas(_loseCanvas, 1);
+          _globalCanvas.SetActive(true);
+          SwitchCanvas(_loseCanvas);
           break;
         case GamePauseState:
+          _globalCanvas.SetActive(true);
           SwitchCanvas(_pauseCanvas);
           break;
       }
@@ -331,13 +348,18 @@ namespace Assets.__Game.Resources.Scripts.Management
 
     private void UpdateAudioButtonVisuals()
     {
-      _pauseAudioOnImage.SetActive(_gameSettings.IsMusicOn);
-      _pauseAudioOffImage.SetActive(!_gameSettings.IsMusicOn);
+      _globalAudioOnImage.SetActive(_gameSettings.IsMusicOn);
+      _globalAudioOffImage.SetActive(!_gameSettings.IsMusicOn);
     }
 
     private void DisplayTimer(EventStructs.TimerEvent timerEvent)
     {
       _gameTimerText.text = $"Час: {timerEvent.Time}";
+    }
+
+    private void OnLastLevel(EventStructs.LastLevelEvent lastLevelEvent)
+    {
+      _lastLevel = lastLevelEvent.LastLevel;
     }
   }
 }

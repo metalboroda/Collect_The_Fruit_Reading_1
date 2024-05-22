@@ -3,6 +3,7 @@ using Assets.__Game.Resources.Scripts.Game.States;
 using Assets.__Game.Resources.Scripts.SOs;
 using Assets.__Game.Scripts.Infrastructure;
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
     [SerializeField] private CorrectValuesContainerSo _correctValuesContainerSo;
     [field: Header("Tutorial")]
     [field: SerializeField] public bool Tutorial { get; private set; }
+    [Header("Stupor param's")]
+    [SerializeField] private float _stuporTimeoutSeconds = 10f;
 
     private List<TreeItem> _correctItems = new List<TreeItem>();
     private List<TreeItem> _incorrectItems = new List<TreeItem>();
@@ -23,10 +26,12 @@ namespace Assets.__Game.Resources.Scripts.Logic
     private TreeItem _placedTreeItem;
     private int _correctCounter;
     private int _incorrectCounter;
+    private Coroutine _stuporTimeoutRoutine;
 
     private GameBootstrapper _gameBootstrapper;
 
     private EventBinding<EventStructs.SpawnedItemsEvent> _spawnedItemsEvent;
+    private EventBinding<EventStructs.StateChanged> _stateChangedEvent;
 
     private void Awake()
     {
@@ -36,11 +41,13 @@ namespace Assets.__Game.Resources.Scripts.Logic
     private void OnEnable()
     {
       _spawnedItemsEvent = new EventBinding<EventStructs.SpawnedItemsEvent>(ReceiveSpawnedItems);
+      _stateChangedEvent = new EventBinding<EventStructs.StateChanged>(StuporTimerDependsOnState);
     }
 
     private void OnDisable()
     {
       _spawnedItemsEvent.Remove(ReceiveSpawnedItems);
+      _stateChangedEvent.Remove(StuporTimerDependsOnState);
     }
 
     private void Start()
@@ -76,6 +83,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
     private void CheckForCorrectItem()
     {
+      ResetAndStartStuporTimer();
+
       if (_correctValuesContainerSo.CorrectValues.Contains(_placedTreeItem.Answer))
       {
         _correctCounter++;
@@ -115,6 +124,34 @@ namespace Assets.__Game.Resources.Scripts.Logic
       }
 
       EventBus<EventStructs.BasketReceivedItemEvent>.Raise(new EventStructs.BasketReceivedItemEvent());
+    }
+
+    private void StuporTimerDependsOnState(EventStructs.StateChanged stateChanged)
+    {
+      if (stateChanged.State is GameplayState)
+        ResetAndStartStuporTimer();
+      else
+      {
+        if (_stuporTimeoutRoutine != null)
+          StopCoroutine(_stuporTimeoutRoutine);
+      }
+    }
+
+    private void ResetAndStartStuporTimer()
+    {
+      if (_stuporTimeoutRoutine != null)
+        StopCoroutine(_stuporTimeoutRoutine);
+
+      _stuporTimeoutRoutine = StartCoroutine(DoStuporTimerCoroutine());
+    }
+
+    private IEnumerator DoStuporTimerCoroutine()
+    {
+      yield return new WaitForSeconds(_stuporTimeoutSeconds);
+
+      EventBus<EventStructs.StuporEvent>.Raise(new EventStructs.StuporEvent());
+
+      ResetAndStartStuporTimer();
     }
   }
 }

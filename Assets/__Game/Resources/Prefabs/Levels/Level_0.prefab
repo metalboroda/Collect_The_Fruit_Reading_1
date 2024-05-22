@@ -11,10 +11,6 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1705648572939193202, guid: a454cc821da5e1b419971d0230763865, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 18bd04dfc2ade2c4d9c96b1dffd1824b, type: 3}
     - target: {fileID: 3325229845286665931, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.5
@@ -35,6 +31,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5154342330046889762, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _questAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 18bd04dfc2ade2c4d9c96b1dffd1824b, type: 3}
     - target: {fileID: 5322166287789507224, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: <Tutorial>k__BackingField
       value: 1
