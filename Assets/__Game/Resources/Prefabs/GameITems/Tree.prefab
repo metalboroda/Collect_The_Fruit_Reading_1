@@ -43,8 +43,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 3.5
-  m_Height: 1.5
+  m_Radius: 2
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3067694640524422247
@@ -65,33 +65,44 @@ MonoBehaviour:
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0430"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u043E"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0435"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0432"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0434"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u044E"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0414"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0412"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u0415"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u041E"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}
   - <ItemsToSpawn>k__BackingField: {fileID: 3223120417504044935, guid: 64019de194416ea42a4039d9aa3acd79, type: 3}
     <AnswerText>k__BackingField: "\u042E"
     <Amount>k__BackingField: 1
+    <NarrationCLip>k__BackingField: {fileID: 0}

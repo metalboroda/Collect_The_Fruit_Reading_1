@@ -396,8 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 8264760717279842906}
   _model: {fileID: 8264760716943559142}
-  _minModelSize: 0.9
-  _maxModelSize: 1.1
+  _minModelSize: 0.7
+  _maxModelSize: 0.8
   _correctParticles: {fileID: 6324248135578473576, guid: fb10678b7def34d4e861c4d11cb8050a, type: 3}
   _incorrectParticles: {fileID: 6324248135578473576, guid: 0b1f3dc34904282408d8447cfe14744b, type: 3}
   _soundEffect: {fileID: 8300000, guid: 021e48d14d44d594b87924f1538199ce, type: 3}
@@ -436,8 +436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.124999985}
-  m_SizeDelta: {x: 0, y: -0.25000003}
+  m_AnchoredPosition: {x: 0, y: -0.0875}
+  m_SizeDelta: {x: 0, y: -0.325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8264760717279842907
 CanvasRenderer:
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.65
+  m_fontSize: 0.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
