@@ -19,6 +19,7 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
 
     private EventBinding<EventStructs.StateChanged> _stateEvent;
     private EventBinding<EventStructs.StuporEvent> _stuporEvent;
+    private EventBinding<EventStructs.TreeItemClickEvent> _treeItemClickEvent;
 
     private void Awake()
     {
@@ -31,12 +32,14 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
     {
       _stateEvent = new EventBinding<EventStructs.StateChanged>(PlayScreenSound);
       _stuporEvent = new EventBinding<EventStructs.StuporEvent>(PlayStuporSound);
+      _treeItemClickEvent = new EventBinding<EventStructs.TreeItemClickEvent>(PlayTreeItemAudioCLip);
     }
 
     private void OnDisable()
     {
       _stateEvent.Remove(PlayScreenSound);
       _stuporEvent.Remove(PlayStuporSound);
+      _treeItemClickEvent.Remove(PlayTreeItemAudioCLip);
     }
 
     private void Start()
@@ -63,6 +66,12 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
     {
       _audioSource.Stop();
       _audioSource.PlayOneShot(_audioTool.GetRandomCLip(_stuporAnnouncerClips));
+    }
+
+    private void PlayTreeItemAudioCLip(EventStructs.TreeItemClickEvent treeItemClickEvent)
+    {
+      _audioSource.Stop();
+      _audioSource.PlayOneShot(treeItemClickEvent.ItemAudioCLip);
     }
   }
 }

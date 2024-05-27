@@ -1,3 +1,4 @@
+using __Game.Resources.Scripts.EventBus;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -73,7 +74,8 @@ namespace Assets.__Game.Resources.Scripts.Logic
         new Vector3(eventData.position.x, eventData.position.y, transform.position.z));
 
       PlaySoundEffect();
-      PlayNarration();
+
+      EventBus<EventStructs.TreeItemClickEvent>.Raise(new EventStructs.TreeItemClickEvent { ItemAudioCLip = NarrationClip });
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -106,13 +108,6 @@ namespace Assets.__Game.Resources.Scripts.Logic
 
       _audioSource.pitch = randomPitch;
       _audioSource.PlayOneShot(_soundEffect);
-    }
-
-    private void PlayNarration()
-    {
-      if (NarrationClip == null) return;
-
-      _audioSource.PlayOneShot(NarrationClip);
     }
   }
 }

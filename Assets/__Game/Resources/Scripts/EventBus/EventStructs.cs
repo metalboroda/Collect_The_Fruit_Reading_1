@@ -2,6 +2,7 @@ using Assets.__Game.Resources.Scripts.Logic;
 using Assets.__Game.Resources.Scripts.SOs;
 using Assets.__Game.Scripts.Enums;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace __Game.Resources.Scripts.EventBus
 {
@@ -40,6 +41,11 @@ namespace __Game.Resources.Scripts.EventBus
       public bool Correct;
       public int CorrectIncrement;
       public int IncorrectIncrement;
+    }
+
+    public struct TreeItemClickEvent : IEvent
+    {
+      public AudioClip ItemAudioCLip;
     }
     #endregion
 
